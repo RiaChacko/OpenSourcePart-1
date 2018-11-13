@@ -26,4 +26,11 @@
         <main.basedir>${project.basedir}</main.basedir>
     </properties>
 
+    <repositories>
+        <repository>
+            <id>common</id>
+            <url>https://gitlab.com/api/v4/projects/9258024/packages/maven</url>
+        </repository>
+    </repositories>
+
 </project>
