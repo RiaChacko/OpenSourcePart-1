@@ -20,6 +20,7 @@
 
     <modules>
         <module>eventstore-api</module>
+        <module>eventstore-engine</module>
     </modules>
 
     <properties>
