@@ -1,0 +1,211 @@
+syntax = "proto3";
+
+package eventstore;
+
+option java_multiple_files = true;
+option java_outer_classname = "EventStoreProto";
+option java_package = "com.marcowillemart.eventstore";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+
+service EventStore {
+
+    //
+    // READING EVENTS
+    //
+
+    // Returns the number of stored events.
+    rpc CountStoredEvents (google.protobuf.Empty) returns (CountStoredEventsResponse) {}
+
+    // Returns the ID of the last event stored if any, else returns 0.
+    rpc LastStoredEventId (google.protobuf.Empty) returns (LastStoredEventIdResponse) {}
+
+    // Returns the stored events between a lower and upper event ID, sorted in
+    // ascending order by their ID.
+    rpc AllStoredEvents (AllStoredEventsRequest) returns (AllStoredEventsResponse) {}
+
+    // Returns true if a given event stream exists, else returns false.
+    rpc EventStreamExists (EventStreamExistsRequest) returns (EventStreamExistsResponse) {}
+
+    // Returns an event stream after a given version.
+    rpc LoadEventStream (LoadEventStreamRequest) returns (LoadEventStreamResponse) {}
+
+    //
+    // WRITING EVENTS
+    //
+
+    // Appends a new event to the event store.
+    rpc Append (EventData) returns (StoredEventData) {}
+
+    // Appends a list of new events to a stream.
+    rpc AppendToStream (AppendToStreamRequest) returns (AppendToStreamResponse) {}
+
+    //
+    // SUBSCRIPTIONS
+    //
+
+    // Subscribes to all events after a given event ID (catch-up subscription)
+    rpc SubscribeToAll (SubscribeToAllRequest) returns (stream StoredEventData) {}
+}
+
+// Response for the `CountStoredEvents` method.
+message CountStoredEventsResponse {
+    // The number of stored events.
+    int64 count = 1;
+}
+
+// Response for the `LastStoredEventId` method.
+message LastStoredEventIdResponse {
+    // The ID of the last event stored.
+    int64 last_event_id = 1;
+}
+
+// Request for the `AllStoredEvents` method.
+message AllStoredEventsRequest {
+    // The first event that will be returned, if any.
+    int64 low_event_id = 1;
+
+    // The last event that will be returned, if any.
+    int64 high_event_id = 2;
+}
+
+// Response for the `AllStoredEvents` method.
+message AllStoredEventsResponse {
+    // The events sorted by their ID in ascending order.
+    repeated StoredEventData events = 1;
+}
+
+// Request for the 'EventStreamExists' method.
+message EventStreamExistsRequest {
+    // The name of the stream.
+    string stream_name = 1;
+}
+
+// Response for the 'EventStreamExistsResponse' method.
+message EventStreamExistsResponse {
+    // Whether the stream exists.
+    bool stream_exists = 1;
+}
+
+// Request for the `LoadEventStream` method.
+message LoadEventStreamRequest {
+    // The name of the stream that will be loaded.
+    string stream_name = 1;
+
+    // The version after which the stream will be loaded.
+    int32 after_stream_version = 2;
+}
+
+// Response for the `LoadEventStream` method.
+message LoadEventStreamResponse {
+    // The version of the loaded stream.
+    int32 stream_version = 1;
+
+    // The events of the stream sorted by their position in the stream in
+    // ascending order.
+    repeated StoredEventData events = 2;
+}
+
+// Request for the `AppendToStream` method.
+message AppendToStreamRequest {
+    // The name of the stream to which to append.
+    // Must not be empty.
+    string stream_name = 1;
+
+    // The version at which we currently expect the stream to be in order that
+    // an optimistic concurrency check can be performed.
+    // If the stream does not exist, the expected version must be 0.
+    // Otherwise the expected_version is compared to the actual_version of the
+    // stream. This will yield one of three results:
+    //   - expected_version > actual_version:
+    //       a WrongExpectedVersion will be returned
+    //   - expected_version = actual_version:
+    //       the events will be appended
+    //   - expected_version < actual_version:
+    //       a WrongExpectedVersion will be returned
+    int32 expected_version = 2;
+
+    // The events to append.
+    repeated EventData events = 3;
+}
+
+// Response for the `AppendToStream` method.
+message AppendToStreamResponse {
+
+    oneof operation_result {
+        // Whether the operation succeeded.
+        bool success = 1;
+
+        // The wrong expected version when the optimistic concurrency check
+        // fails.
+        WrongExpectedVersion wrong_expected_version = 2;
+    }
+}
+
+// Request for the `SubscribeToAll` method.
+message SubscribeToAllRequest {
+    // The starting event ID after which to subscribe.
+    // Must be either be positive or 0 if the subscription should catch-up from
+    // the beginning of the event store.
+    int64 after_event_id = 1;
+}
+
+// An event to be stored.
+message EventData {
+    // The name of the event type.
+    // type != ''
+    string type = 1;
+
+    // The serialized body of the event to be stored.
+    bytes body = 2;
+}
+
+// A stored event.
+message StoredEventData {
+    // The unique ID of the stored event.
+    // event_id > 0
+    int64 event_id = 1;
+
+    // The type name of the stored event.
+    // event_type != ''
+    string event_type = 2;
+
+    // The serialized body of the stored event.
+    bytes event_body = 3;
+
+    // The date and time of the occurrence of the stored event.
+    // occurred_on <= NOW
+    google.protobuf.Timestamp occurred_on = 4;
+
+    // The name of the event stream the stored event belongs to.
+    // An empty name means the stored event does not belong to any stream.
+    string stream_name = 5;
+
+    // The number of the stored event in the stream.
+    // stream_name = '' <-> stream_version = 0
+    // stream_name != '' <-> stream_version > 0
+    int32 stream_version = 6;
+}
+
+// A wrong expected version.
+message WrongExpectedVersion {
+    // The name of the stream that multiple users attempt to modify at the same
+    // time.
+    // stream_name != ''
+    string stream_name = 1;
+
+    // The expected version of the stream.
+    // expected_version >= 0
+    int32 expected_version = 2;
+
+    // The actual version of the stream.
+    // actual_version > 0
+    // actual_version != expected_version
+    int32 actual_version = 3;
+
+    // If expected_version < actual_version, the events of the stream after the
+    // expected version, i.e., the events that were concurrently appended to the
+    // stream. Otherwise empty.
+    repeated StoredEventData actual_events = 4;
+}

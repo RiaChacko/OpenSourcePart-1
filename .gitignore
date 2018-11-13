@@ -1,0 +1,29 @@
+# General Rules
+~*
+*~
+*.java._trace
+*.bak
+
+# System Files
+**/.DS_Store
+**/Thumbs.db
+
+# Eclise
+**/.classpath
+**/.project
+**/.settings
+
+# IntelliJ
+**/.idea/
+**/*.iml
+
+# Maven
+**/target
+
+# NetBeans
+**/nbproject
+**/nb-configuration.xml
+
+# Visual Studio Code
+**/.factorypath
+**/.vscode
