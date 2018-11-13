@@ -9,6 +9,7 @@
         <groupId>com.marcowillemart</groupId>
         <artifactId>common-parent</artifactId>
         <version>1.0.0-SNAPSHOT</version>
+        <relativePath/>
     </parent>
 
     <artifactId>eventstore</artifactId>
