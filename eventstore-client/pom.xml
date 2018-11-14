@@ -11,33 +11,33 @@
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>eventstore-engine</artifactId>
+    <artifactId>eventstore-client</artifactId>
 
-    <name>EventStore Engine</name>
-    <description>Generic event storage engine.</description>
+    <name>EventStore Client</name>
+    <description>Client to access a standalone event store.</description>
 
     <properties>
         <main.basedir>${project.basedir}/..</main.basedir>
     </properties>
 
     <dependencies>
-        <!-- Common Core -->
+        <!-- gRPC Client Starter -->
         <dependency>
             <groupId>com.marcowillemart</groupId>
-            <artifactId>common-core</artifactId>
+            <artifactId>grpc-client-starter</artifactId>
         </dependency>
 
-        <!-- Spring Framework -->
+        <!-- Common Event -->
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-jdbc</artifactId>
+            <groupId>com.marcowillemart</groupId>
+            <artifactId>common-event</artifactId>
         </dependency>
 
-        <!-- H2 -->
+        <!-- EventStore API -->
         <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <scope>test</scope>
+            <groupId>com.marcowillemart</groupId>
+            <artifactId>eventstore-api</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
 
         <!-- Common Test -->

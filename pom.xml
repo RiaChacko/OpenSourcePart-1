@@ -20,11 +20,16 @@
 
     <modules>
         <module>eventstore-api</module>
+        <module>eventstore-client</module>
+        <module>eventstore-client-embedded</module>
         <module>eventstore-engine</module>
+        <module>eventstore-server</module>
+        <module>eventstore-starter</module>
     </modules>
 
     <properties>
         <main.basedir>${project.basedir}</main.basedir>
+        <grpc-starter.version>1.0.0-SNAPSHOT</grpc-starter.version>
     </properties>
 
     <repositories>
@@ -32,6 +37,28 @@
             <id>common</id>
             <url>https://gitlab.com/api/v4/projects/9258024/packages/maven</url>
         </repository>
+        <repository>
+            <id>grpc-starter</id>
+            <url>https://gitlab.com/api/v4/projects/9256514/packages/maven</url>
+        </repository>
     </repositories>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- gRPC Client Starter -->
+            <dependency>
+                <groupId>com.marcowillemart</groupId>
+                <artifactId>grpc-client-starter</artifactId>
+                <version>${grpc-starter.version}</version>
+            </dependency>
+
+            <!-- gRPC Server Starter -->
+            <dependency>
+                <groupId>com.marcowillemart</groupId>
+                <artifactId>grpc-server-starter</artifactId>
+                <version>${grpc-starter.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
 </project>
