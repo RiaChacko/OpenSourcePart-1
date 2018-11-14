@@ -25,6 +25,7 @@
         <module>eventstore-engine</module>
         <module>eventstore-server</module>
         <module>eventstore-starter</module>
+        <module>eventstore-bom</module>
     </modules>
 
     <properties>
@@ -45,6 +46,15 @@
 
     <dependencyManagement>
         <dependencies>
+            <!-- EventStore (Bill Of Materials) -->
+            <dependency>
+                <groupId>com.marcowillemart</groupId>
+                <artifactId>eventstore-bom</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
             <!-- gRPC Client Starter -->
             <dependency>
                 <groupId>com.marcowillemart</groupId>
