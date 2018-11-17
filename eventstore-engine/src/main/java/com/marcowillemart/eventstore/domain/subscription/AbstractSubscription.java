@@ -25,9 +25,8 @@ public abstract class AbstractSubscription implements Subscription {
         Assert.notNull(storedEvent);
         Assert.isTrue(afterEventId < storedEvent.eventId());
 
-        doDeliver(storedEvent);
-
         lastDeliveredEventId = storedEvent.eventId();
+        doDeliver(storedEvent);
 
         checkRep();
     }
