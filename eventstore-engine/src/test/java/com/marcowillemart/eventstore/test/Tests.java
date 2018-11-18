@@ -1,4 +1,4 @@
-package com.skalup.eventstore.test;
+package com.marcowillemart.eventstore.test;
 
 import com.google.protobuf.Message;
 import static com.marcowillemart.common.test.Tests.*;

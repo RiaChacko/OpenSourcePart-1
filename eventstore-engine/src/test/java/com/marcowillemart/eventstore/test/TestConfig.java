@@ -1,4 +1,4 @@
-package com.skalup.eventstore.test;
+package com.marcowillemart.eventstore.test;
 
 import javax.sql.DataSource;
 import org.springframework.context.annotation.Bean;

@@ -1,4 +1,4 @@
-package com.skalup.eventstore.infrastructure.persistence;
+package com.marcowillemart.eventstore.infrastructure.persistence;
 
 import static com.marcowillemart.common.test.Tests.*;
 import com.marcowillemart.eventstore.domain.EventData;
@@ -6,9 +6,8 @@ import com.marcowillemart.eventstore.domain.EventNotifiable;
 import com.marcowillemart.eventstore.domain.EventStorageEngine;
 import com.marcowillemart.eventstore.domain.StoredEventData;
 import com.marcowillemart.eventstore.domain.WrongExpectedVersionException;
-import com.marcowillemart.eventstore.infrastructure.persistence.JdbcEventStorageEngine;
-import com.skalup.eventstore.test.TestConfig;
-import static com.skalup.eventstore.test.Tests.*;
+import com.marcowillemart.eventstore.test.TestConfig;
+import static com.marcowillemart.eventstore.test.Tests.*;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
