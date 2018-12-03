@@ -7,7 +7,7 @@
 
     <groupId>com.marcowillemart</groupId>
     <artifactId>eventstore-bom</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>EventStore (Bill of Materials)</name>
@@ -19,42 +19,42 @@
             <dependency>
                 <groupId>com.marcowillemart</groupId>
                 <artifactId>eventstore-api</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
+                <version>1.1.0-SNAPSHOT</version>
             </dependency>
 
             <!-- EventStore Client -->
             <dependency>
                 <groupId>com.marcowillemart</groupId>
                 <artifactId>eventstore-client</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
+                <version>1.1.0-SNAPSHOT</version>
             </dependency>
 
             <!-- EventStore Client Embedded -->
             <dependency>
                 <groupId>com.marcowillemart</groupId>
                 <artifactId>eventstore-client-embedded</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
+                <version>1.1.0-SNAPSHOT</version>
             </dependency>
 
             <!-- EventStore Engine -->
             <dependency>
                 <groupId>com.marcowillemart</groupId>
                 <artifactId>eventstore-engine</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
+                <version>1.1.0-SNAPSHOT</version>
             </dependency>
 
             <!-- EventStore Server -->
             <dependency>
                 <groupId>com.marcowillemart</groupId>
                 <artifactId>eventstore-server</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
+                <version>1.1.0-SNAPSHOT</version>
             </dependency>
 
             <!-- EventStore Starter -->
             <dependency>
                 <groupId>com.marcowillemart</groupId>
                 <artifactId>eventstore-starter</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
+                <version>1.1.0-SNAPSHOT</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
