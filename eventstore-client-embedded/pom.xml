@@ -26,7 +26,7 @@
     <dependencies>
         <!-- Common Event -->
         <dependency>
-            <groupId>com.marcowillemart</groupId>
+            <groupId>com.marcowillemart.common</groupId>
             <artifactId>common-event</artifactId>
         </dependency>
 
@@ -38,7 +38,7 @@
 
         <!-- Common Test -->
         <dependency>
-            <groupId>com.marcowillemart</groupId>
+            <groupId>com.marcowillemart.common</groupId>
             <artifactId>common-test</artifactId>
             <scope>test</scope>
         </dependency>

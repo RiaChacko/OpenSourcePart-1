@@ -27,7 +27,7 @@
 
         <!-- Common Event -->
         <dependency>
-            <groupId>com.marcowillemart</groupId>
+            <groupId>com.marcowillemart.common</groupId>
             <artifactId>common-event</artifactId>
         </dependency>
 

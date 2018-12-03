@@ -23,7 +23,7 @@
     <dependencies>
         <!-- Common Core -->
         <dependency>
-            <groupId>com.marcowillemart</groupId>
+            <groupId>com.marcowillemart.common</groupId>
             <artifactId>common-core</artifactId>
         </dependency>
 
@@ -42,7 +42,7 @@
 
         <!-- Common Test -->
         <dependency>
-            <groupId>com.marcowillemart</groupId>
+            <groupId>com.marcowillemart.common</groupId>
             <artifactId>common-test</artifactId>
             <scope>test</scope>
         </dependency>

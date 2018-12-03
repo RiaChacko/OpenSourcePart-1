@@ -23,7 +23,7 @@
     <dependencies>
         <!-- gRPC Server Starter -->
         <dependency>
-            <groupId>com.marcowillemart</groupId>
+            <groupId>com.marcowillemart.grpc</groupId>
             <artifactId>grpc-server-starter</artifactId>
         </dependency>
 
@@ -61,14 +61,14 @@
 
         <!-- Common Test -->
         <dependency>
-            <groupId>com.marcowillemart</groupId>
+            <groupId>com.marcowillemart.common</groupId>
             <artifactId>common-test</artifactId>
             <scope>test</scope>
         </dependency>
 
         <!-- gRPC Client Starter -->
         <dependency>
-            <groupId>com.marcowillemart</groupId>
+            <groupId>com.marcowillemart.grpc</groupId>
             <artifactId>grpc-client-starter</artifactId>
             <scope>test</scope>
         </dependency>
